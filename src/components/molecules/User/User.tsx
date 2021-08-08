@@ -23,6 +23,10 @@ const StyledUserTitle = styled.p`
     margin: 0;
 `;
 
+const StyledStatusWrapper = styled(StatusWrapper)`
+    margin-right: 16px;
+`;
+
 export const User = ({
     userName,
     statusType,
@@ -30,12 +34,12 @@ export const User = ({
     ...rest
 }: UserProps) => (
     <StyledUser>
-        <StatusWrapper statusType={statusType}>
+        <StyledStatusWrapper statusType={statusType}>
             <Avatar
                 size={AvatarSizeEnum.MEDIUM}
                 src="https://source.unsplash.com/rDEOVtE7vOs/64x64"
             />
-        </StatusWrapper>
+        </StyledStatusWrapper>
         <Flex justifyContent="center" direction="column">
             <StyledUserTitle>{userName}</StyledUserTitle>
             {languages && <LanguageList languages={languages} />}

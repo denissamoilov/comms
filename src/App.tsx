@@ -6,6 +6,9 @@ import { User } from "./components/molecules/User/User";
 import { StatusTypeEnum } from "./components/Status/Status";
 import { XIcon, VolumeUpIcon } from "@heroicons/react/outline";
 import { Flex } from "./components/Flex/Flex";
+import { ChatFooter } from "./components/ChatFooter/ChatFooter";
+import { ChatContent } from "./components/ChatContent/ChatContent";
+import { Message, MessageTypeEnum } from "./components/Message/Message";
 
 export const App = () => {
     const userLanguages = [
@@ -18,7 +21,7 @@ export const App = () => {
     ];
 
     return (
-        <div className="App">
+        <Flex alignItems="center" justifyContent="center">
             <Chat>
                 <ChatHeader>
                     <User
@@ -31,9 +34,77 @@ export const App = () => {
                         <Button prependIcon={<XIcon />} />
                     </Flex>
                 </ChatHeader>
-                Chat
+                <ChatContent>
+                    <Flex direction="column-reverse">
+                        <Message type={MessageTypeEnum.USER}>
+                            Hello HelloHello HelloHello HelloHello HelloHello
+                            HelloHello Hello
+                        </Message>
+                        <Message type={MessageTypeEnum.USER}>
+                            Hello HelloHello HelloHello HelloHello HelloHello
+                            HelloHello Hello
+                        </Message>
+                        <Message type={MessageTypeEnum.MODERATOR}>
+                            Hello HelloHello HelloHello HelloHello HelloHello
+                            HelloHello Hello
+                        </Message>
+                        <Message type={MessageTypeEnum.USER}>
+                            Hello HelloHello HelloHello HelloHello HelloHello
+                            HelloHello Hello
+                        </Message>
+                        <Message type={MessageTypeEnum.MODERATOR}>
+                            Hello HelloHello HelloHello HelloHello HelloHello
+                            HelloHello Hello
+                        </Message>
+                        <Message type={MessageTypeEnum.USER}>
+                            Hello HelloHello HelloHello HelloHello HelloHello
+                            HelloHello Hello
+                        </Message>
+                        <Message type={MessageTypeEnum.MODERATOR}>
+                            Hello HelloHello HelloHello HelloHello HelloHello
+                            HelloHello Hello
+                        </Message>
+                        <Message type={MessageTypeEnum.USER}>
+                            Hello HelloHello HelloHello HelloHello HelloHello
+                            HelloHello Hello
+                        </Message>
+                        <Message type={MessageTypeEnum.MODERATOR}>
+                            Hello HelloHello HelloHello HelloHello HelloHello
+                            HelloHello Hello
+                        </Message>
+                        <Message type={MessageTypeEnum.USER}>
+                            Hello HelloHello HelloHello HelloHello HelloHello
+                            HelloHello Hello
+                        </Message>
+                        <Message type={MessageTypeEnum.MODERATOR}>
+                            Hello HelloHello HelloHello HelloHello HelloHello
+                            HelloHello Hello
+                        </Message>
+                        <Message type={MessageTypeEnum.USER}>
+                            Hello HelloHello HelloHello HelloHello HelloHello
+                            HelloHello Hello
+                        </Message>
+                        <Message type={MessageTypeEnum.MODERATOR}>
+                            Hello HelloHello HelloHello HelloHello HelloHello
+                            HelloHello Hello
+                        </Message>
+                        <Message type={MessageTypeEnum.USER}>
+                            Hello HelloHello HelloHello HelloHello HelloHello
+                            HelloHello Hello
+                        </Message>
+                        <Message type={MessageTypeEnum.MODERATOR}>
+                            Hello HelloHello HelloHello HelloHello HelloHello
+                            HelloHello Hello
+                        </Message>
+                        <Message type={MessageTypeEnum.MODERATOR}>
+                            Hello HelloHello HelloHello HelloHello HelloHello
+                            HelloHello Hello
+                        </Message>
+                    </Flex>
+                </ChatContent>
+                <ChatFooter />
             </Chat>
-        </div>
+        </Flex>
     );
 };
 

@@ -1,7 +1,14 @@
 import React, { ReactNode } from "react";
 import styled from "styled-components";
 
-const StyledButton = styled.button`
+export enum ButtonColorEnum {
+    DEFAULT = "default",
+    WHITE = "white",
+}
+
+const StyledButton = styled.button.attrs(
+    (props: { color: ButtonColorEnum }) => props
+)`
     align-items: center;
     background: none;
     border-radius: 8px;
@@ -14,7 +21,8 @@ const StyledButton = styled.button`
     transition: background-color 250ms ease-in-out;
 
     &:hover {
-        background-color: #eee;
+        background-color: ${(props) =>
+            props.color === ButtonColorEnum.WHITE ? "#fafafa" : "#dadddd"};
     }
 `;
 
@@ -26,11 +34,17 @@ const StyledIcon = styled.span`
 
 type ButtonProps = {
     prependIcon?: ReactNode;
+    color?: ButtonColorEnum;
 } & React.HTMLAttributes<HTMLButtonElement>;
 
-export const Button = ({ children, prependIcon, ...rest }: ButtonProps) => {
+export const Button = ({
+    children,
+    color,
+    prependIcon,
+    ...rest
+}: ButtonProps) => {
     return (
-        <StyledButton {...rest}>
+        <StyledButton color={color} {...rest}>
             {prependIcon && <StyledIcon>{prependIcon}</StyledIcon>}
             {children}
         </StyledButton>

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-type DirectionType = "column" | "row";
+type DirectionType = "column" | "column-reverse" | "row";
 type AlignItemsType = "flex-start" | "center" | "flex-end";
 type JustifyContentType =
     | "flex-start"

@@ -30,8 +30,12 @@ const StyledLanguageList = styled.div`
 
 export const LanguageList = ({ languages, ...rest }: LanguageListProps) => (
     <StyledLanguageList>
-        {languages.map((lang) => (
-            <StyledFlag country={lang.country} size={16} />
+        {languages.map((lang, index) => (
+            <StyledFlag
+                key={`${lang.country}-${index}`}
+                country={lang.country}
+                size={16}
+            />
         ))}
     </StyledLanguageList>
 );
