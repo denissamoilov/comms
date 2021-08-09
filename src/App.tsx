@@ -37,14 +37,11 @@ const httpLink = createHttpLink({
 });
 
 const authLink = setContext((_, { headers }) => {
-    // get the authentication token from local storage if it exists
-    const token =
-        "eVsdOYwA85ygQDejX1eojS1A2OLab4d2tZb3aWWXJuQUrpSk7euySuWvCbIuxen5";
-    // return the headers to the context so httpLink can read them
     return {
         headers: {
             ...headers,
-            authorization: token ? `Bearer ${token}` : "",
+            "x-hasura-admin-secret":
+                "eVsdOYwA85ygQDejX1eojS1A2OLab4d2tZb3aWWXJuQUrpSk7euySuWvCbIuxen5",
         },
     };
 });
@@ -81,7 +78,6 @@ export const App = () => {
                     </ChatHeader>
                     <ChatContent>
                         <Messages />
-                        <Message type={MessageTypeEnum.USER}>Message 1</Message>
                     </ChatContent>
                     <ChatFooter />
                 </Chat>

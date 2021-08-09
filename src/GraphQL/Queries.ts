@@ -1,26 +1,11 @@
 import { gql } from "@apollo/client"
   
-enum Sort {
-    asc = "asc",
-    desc = "desc"
-}
-  
-type OrderById  = {
-    content: Sort
-}
-
-type OrderByBody = {
-    content: Sort
-}
-
-type OrderBySenderName = {
-    content: Sort
-}
-
-type OrderBy = OrderById | OrderByBody | OrderBySenderName;
-  
 export const LOAD_MESSAGES = gql`
-    query getMessages($limit: Int! $offset: Int! $order_by: OrderBy ) {
+    query getMessages(
+        $limit: Int
+        $offset: Int
+        $order_by: [messages_order_by!]
+    ) {
         messages(
             limit: $limit
             offset: $offset
