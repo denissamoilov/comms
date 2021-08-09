@@ -10,6 +10,50 @@ import { ChatFooter } from "./components/ChatFooter/ChatFooter";
 import { ChatContent } from "./components/ChatContent/ChatContent";
 import { Message, MessageTypeEnum } from "./components/Message/Message";
 
+import {
+    ApolloClient,
+    InMemoryCache,
+    ApolloProvider,
+    HttpLink,
+    from,
+    createHttpLink,
+} from "@apollo/client";
+
+import { setContext } from "@apollo/client/link/context";
+
+import { onError } from "@apollo/client/link/error";
+import { Messages } from "./components/Messages/Messages";
+
+const errorLink = onError(({ graphQLErrors, networkError }) => {
+    if (graphQLErrors) {
+        graphQLErrors.map(({ message }) => {
+            alert(`GraphQL error ${message}`);
+        });
+    }
+});
+
+const httpLink = createHttpLink({
+    uri: "https://guided-ferret-24.hasura.app/v1/graphql",
+});
+
+const authLink = setContext((_, { headers }) => {
+    // get the authentication token from local storage if it exists
+    const token =
+        "eVsdOYwA85ygQDejX1eojS1A2OLab4d2tZb3aWWXJuQUrpSk7euySuWvCbIuxen5";
+    // return the headers to the context so httpLink can read them
+    return {
+        headers: {
+            ...headers,
+            authorization: token ? `Bearer ${token}` : "",
+        },
+    };
+});
+
+const client = new ApolloClient({
+    cache: new InMemoryCache(),
+    link: authLink.concat(httpLink),
+});
+
 export const App = () => {
     const userLanguages = [
         {
@@ -21,90 +65,28 @@ export const App = () => {
     ];
 
     return (
-        <Flex alignItems="center" justifyContent="center">
-            <Chat>
-                <ChatHeader>
-                    <User
-                        statusType={StatusTypeEnum.ONLINE}
-                        userName="Kubota"
-                        languages={userLanguages}
-                    />
-                    <Flex alignItems="center">
-                        <Button prependIcon={<VolumeUpIcon />} />
-                        <Button prependIcon={<XIcon />} />
-                    </Flex>
-                </ChatHeader>
-                <ChatContent>
-                    <Flex direction="column-reverse">
-                        <Message type={MessageTypeEnum.USER}>
-                            Hello HelloHello HelloHello HelloHello HelloHello
-                            HelloHello Hello
-                        </Message>
-                        <Message type={MessageTypeEnum.USER}>
-                            Hello HelloHello HelloHello HelloHello HelloHello
-                            HelloHello Hello
-                        </Message>
-                        <Message type={MessageTypeEnum.MODERATOR}>
-                            Hello HelloHello HelloHello HelloHello HelloHello
-                            HelloHello Hello
-                        </Message>
-                        <Message type={MessageTypeEnum.USER}>
-                            Hello HelloHello HelloHello HelloHello HelloHello
-                            HelloHello Hello
-                        </Message>
-                        <Message type={MessageTypeEnum.MODERATOR}>
-                            Hello HelloHello HelloHello HelloHello HelloHello
-                            HelloHello Hello
-                        </Message>
-                        <Message type={MessageTypeEnum.USER}>
-                            Hello HelloHello HelloHello HelloHello HelloHello
-                            HelloHello Hello
-                        </Message>
-                        <Message type={MessageTypeEnum.MODERATOR}>
-                            Hello HelloHello HelloHello HelloHello HelloHello
-                            HelloHello Hello
-                        </Message>
-                        <Message type={MessageTypeEnum.USER}>
-                            Hello HelloHello HelloHello HelloHello HelloHello
-                            HelloHello Hello
-                        </Message>
-                        <Message type={MessageTypeEnum.MODERATOR}>
-                            Hello HelloHello HelloHello HelloHello HelloHello
-                            HelloHello Hello
-                        </Message>
-                        <Message type={MessageTypeEnum.USER}>
-                            Hello HelloHello HelloHello HelloHello HelloHello
-                            HelloHello Hello
-                        </Message>
-                        <Message type={MessageTypeEnum.MODERATOR}>
-                            Hello HelloHello HelloHello HelloHello HelloHello
-                            HelloHello Hello
-                        </Message>
-                        <Message type={MessageTypeEnum.USER}>
-                            Hello HelloHello HelloHello HelloHello HelloHello
-                            HelloHello Hello
-                        </Message>
-                        <Message type={MessageTypeEnum.MODERATOR}>
-                            Hello HelloHello HelloHello HelloHello HelloHello
-                            HelloHello Hello
-                        </Message>
-                        <Message type={MessageTypeEnum.USER}>
-                            Hello HelloHello HelloHello HelloHello HelloHello
-                            HelloHello Hello
-                        </Message>
-                        <Message type={MessageTypeEnum.MODERATOR}>
-                            Hello HelloHello HelloHello HelloHello HelloHello
-                            HelloHello Hello
-                        </Message>
-                        <Message type={MessageTypeEnum.MODERATOR}>
-                            Hello HelloHello HelloHello HelloHello HelloHello
-                            HelloHello Hello
-                        </Message>
-                    </Flex>
-                </ChatContent>
-                <ChatFooter />
-            </Chat>
-        </Flex>
+        <ApolloProvider client={client}>
+            <Flex alignItems="center" justifyContent="center">
+                <Chat>
+                    <ChatHeader>
+                        <User
+                            statusType={StatusTypeEnum.ONLINE}
+                            userName="Kubota"
+                            languages={userLanguages}
+                        />
+                        <Flex alignItems="center">
+                            <Button prependIcon={<VolumeUpIcon />} />
+                            <Button prependIcon={<XIcon />} />
+                        </Flex>
+                    </ChatHeader>
+                    <ChatContent>
+                        <Messages />
+                        <Message type={MessageTypeEnum.USER}>Message 1</Message>
+                    </ChatContent>
+                    <ChatFooter />
+                </Chat>
+            </Flex>
+        </ApolloProvider>
     );
 };
 

@@ -17,6 +17,7 @@ const StyledChatFooter = styled.div`
 `;
 
 const StyledTextArea = styled(TextArea)`
+    margin-right: 16px;
     width: 100%;
 `;
 
