@@ -21,7 +21,7 @@ const StyledMessage = styled.div.attrs(
     color: ${(props) =>
         props.type === MessageTypeEnum.USER ? "#2C333B" : "#fff"};
     margin: ${(props) =>
-        props.type === MessageTypeEnum.USER ? "0 48px 8px 0" : "0 0 8px 48px"};
+        props.type === MessageTypeEnum.USER ? "8px 48px 0 0" : "8px 0 0 48px"};
     padding: 8px 12px;
     font-size: 14px;
 

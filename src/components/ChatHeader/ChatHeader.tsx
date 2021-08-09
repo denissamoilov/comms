@@ -5,6 +5,7 @@ const StyledChatHeader = styled.div`
     background: #f2f5f6;
     display: flex;
     flex-direction: row;
+    flex-shrink: 0;
     justify-content: space-between;
     overflow: hidden;
     padding: 16px 24px;

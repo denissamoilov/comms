@@ -6,7 +6,8 @@ const StyledChatContent = styled.div`
     background: #fff;
     height: 100%;
     overflow-y: auto;
-    padding: 16px 24px;
+    padding: 0 24px;
+    margin: 16px 0;
     overscroll-behavior-y: contain;
     scroll-snap-type: y proximity;
 `;
